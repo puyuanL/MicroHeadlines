@@ -16,6 +16,7 @@ public enum ResultCodeEnum {
     PUBLISH_ERROR(506,"publishError"),
     FIND_HID_ERROR(507,"findHidError"),
     UPDATE_ERROR(508,"updateError"),
+    DELETE_ERROR(509,"deleteError"),
     ;
 
     private final Integer code;

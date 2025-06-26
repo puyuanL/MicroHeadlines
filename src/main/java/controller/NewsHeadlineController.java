@@ -27,8 +27,14 @@ public class NewsHeadlineController extends BaseController{
      * @param resp HttpServletResponse
      * @throws ServletException ServletException
      */
-    protected void removeByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void removeByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        int hid = Integer.parseInt(req.getParameter("hid"));
+        Result<Object> result;
+        if(headlineService.removeByHid(hid) > 0)
+            result = Result.ok(null);
+        else
+            result = Result.build(null, ResultCodeEnum.DELETE_ERROR);
+        WebUtil.writeJson(resp, result);
     }
 
     /**

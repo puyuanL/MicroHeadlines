@@ -24,6 +24,7 @@ public interface NewsHeadlineService {
     /**
      * add one piece of news to database
      * @param newsHeadline NewsHeadline
+     * @return SQL State Code
      */
     int addNewsHeadline(NewsHeadline newsHeadline);
 
@@ -37,14 +38,15 @@ public interface NewsHeadlineService {
     /**
      * update news data
      * @param newsHeadline NewsHeadline
+     * @return SQL State Code
      */
     int update(NewsHeadline newsHeadline);
 
 
     /**
-     *
-     * @param hid
-     * @return
+     * remove news data
+     * @param hid news id
+     * @return SQL State Code
      */
-//    int removeByHid(int hid);
+    int removeByHid(int hid);
 }

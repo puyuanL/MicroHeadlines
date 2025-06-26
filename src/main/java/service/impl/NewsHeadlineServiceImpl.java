@@ -74,4 +74,13 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
     public int update(NewsHeadline newsHeadline) {
         return newsHeadlineDao.update(newsHeadline);
     }
+
+    /**
+     * remove news data
+     * @param hid news id
+     * @return SQL State Code
+     */
+    public int removeByHid(int hid) {
+        return newsHeadlineDao.removeByHid(hid);
+    }
 }

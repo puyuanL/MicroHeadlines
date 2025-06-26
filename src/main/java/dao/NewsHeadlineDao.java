@@ -49,7 +49,17 @@ public interface NewsHeadlineDao {
      */
     NewsHeadline findByHid(Integer hid);
 
+    /**
+     * update news by news info (hid)
+     * @param newsHeadline NewsHeadline
+     * @return SQL Insert State Code
+     */
     int update(NewsHeadline newsHeadline);
 
-//    int removeByHid(int hid);
+    /**
+     * remove news by hid
+     * @param hid int
+     * @return SQL Insert State Code
+     */
+    int removeByHid(int hid);
 }
