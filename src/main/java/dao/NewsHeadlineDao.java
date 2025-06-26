@@ -9,43 +9,43 @@ import java.util.List;
 
 public interface NewsHeadlineDao {
     /**
-     *
-     * @param headlineQueryVo
-     * @return
+     * Find data on current page
+     * @param headlineQueryVo HeadlineQueryVo
+     * @return All query data
      */
-    List<HeadlinePageVo> findPageList(HeadlineQueryVo headlineQueryVo);
+     List<HeadlinePageVo> findPageList(HeadlineQueryVo headlineQueryVo);
 
     /**
-     *
-     * @param headlineQueryVo
-     * @return
+     * find data match the Query
+     * @param headlineQueryVo HeadlineQueryVo
+     * @return number of data
      */
-    int findPageCount(HeadlineQueryVo headlineQueryVo);
-
-    /**
-     *
-     * @param hid
-     * @return
-     */
-    int incrPageViews(int hid);
+     int findPageCount(HeadlineQueryVo headlineQueryVo);
 
     /**
      *
      * @param hid
      * @return
      */
-    HeadlineDetailVo findHealineDetail(int hid);
+//    int incrPageViews(int hid);
 
-    int addNewsHeadline(NewsHeadline newsHeadline);
+     /**
+     *
+     * @param hid
+     * @return
+     */
+//    HeadlineDetailVo findHealineDetail(int hid);
+
+//    int addNewsHeadline(NewsHeadline newsHeadline);
 
     /**
      *
      * @param hid
      * @return
      */
-    NewsHeadline findByHid(Integer hid);
+//    NewsHeadline findByHid(Integer hid);
 
-    int update(NewsHeadline newsHeadline);
+//    int update(NewsHeadline newsHeadline);
 
-    int removeByHid(int hid);
+//    int removeByHid(int hid);
 }

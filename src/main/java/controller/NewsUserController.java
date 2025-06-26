@@ -19,7 +19,7 @@ import java.util.Objects;
 
 @WebServlet("/user/*")
 public class NewsUserController extends BaseController{
-    private int i = 1;
+
     private final NewsUserService userService = new NewsUserServiceImpl();
 
     /**

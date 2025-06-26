@@ -12,7 +12,7 @@ public interface NewsHeadlineService {
      * @param headlineQueryVo
      * @return
      */
-//    Map findPage(HeadlineQueryVo headlineQueryVo);
+     Map<String, Object> findPage(HeadlineQueryVo headlineQueryVo);
 
     /**
      *

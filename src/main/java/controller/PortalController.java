@@ -1,6 +1,7 @@
 package controller;
 
 import common.Result;
+import pojo.NewsHeadline;
 import pojo.NewsType;
 import pojo.vo.HeadlineDetailVo;
 import pojo.vo.HeadlineQueryVo;
@@ -20,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 门户 控制器
- * 那些不需要登录,不需要做增删改的门户页的请求都放在这里
+ * Portal Controller
+ * Request for portal pages that do not require login and do not need to be added, deleted or modified
  * */
 @WebServlet("/portal/*")
 public class PortalController extends BaseController{
@@ -30,37 +31,37 @@ public class PortalController extends BaseController{
 
 
     /**
-     * 查询头条详情的业务接口实现
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * The interface implementation for querying the details of Headlines
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
-    protected void showHeadlineDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void showHeadlineDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
     }
 
     /**
-     * 分页查询头条信息的接口实现
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * The interface implementation for pagination query of headline information
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
-    protected void findNewsPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void findNewsPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        HeadlineQueryVo headlineQueryVo = WebUtil.readJson(req, HeadlineQueryVo.class);
+        Map<String, Object> pageInfo = headlineService.findPage(headlineQueryVo);
+        Map<String, Object> pageInfoMap = new HashMap<>();
+        pageInfoMap.put("pageInfo", pageInfo);
+        WebUtil.writeJson(resp, Result.ok(pageInfoMap));
     }
 
     /**
-     * 查询所有头条类型的业务接口实现
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * The business interface implementations for querying all headline types
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
-    protected void findAllTypes(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 查询所有的新闻类型,装入Result响应给客户端
-        List<NewsType> newsTypeList= typeService.findAll();
-        WebUtil.writeJson(resp,Result.ok(newsTypeList));
+    protected void findAllTypes(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        List<NewsType> newsTypeList = typeService.findAll();
+        WebUtil.writeJson(resp, Result.ok(newsTypeList));
     }
 }

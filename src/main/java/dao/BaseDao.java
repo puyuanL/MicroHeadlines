@@ -53,8 +53,8 @@ public class BaseDao {
     }
     // 公共的查询方法  返回的是对象的集合
 
-    public <T> List<T> baseQuery(Class clazz, String sql, Object ... args){
-        List<T> list =new ArrayList<>();
+    public <T> List<T> baseQuery(Class<?> clazz, String sql, Object ... args){
+        List<T> list = new ArrayList<>();
         Connection connection = JDBCUtil.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet =null;
@@ -76,7 +76,7 @@ public class BaseDao {
             // 将结果集通过反射封装成实体类对象
             while (resultSet.next()) {
                 // 使用反射实例化对象
-                Object obj =clazz.getDeclaredConstructor().newInstance();
+                Object obj = clazz.getDeclaredConstructor().newInstance();
 
                 for (int i = 1; i <= columnCount; i++) {
                     String columnName = metaData.getColumnLabel(i);
@@ -89,14 +89,13 @@ public class BaseDao {
                     field.setAccessible(true);
                     field.set(obj,value);
                 }
-
                 list.add((T)obj);
             }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            if (null !=resultSet) {
+            if (null != resultSet) {
                 try {
                     resultSet.close();
                 } catch (SQLException e) {
@@ -143,7 +142,6 @@ public class BaseDao {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
             }
             JDBCUtil.releaseConnection();
         }
