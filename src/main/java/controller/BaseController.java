@@ -18,7 +18,7 @@ public class BaseController extends HttpServlet {
         String[] split = requestURI.split("/");
         String methodName = split[split.length - 1];
         // 通过反射获取要执行的方法
-        Class clazz = this.getClass();
+        Class<?> clazz = this.getClass();
         try {
             Method method = clazz.getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
             // 设置方法可以访问
@@ -26,7 +26,7 @@ public class BaseController extends HttpServlet {
             // 通过反射执行代码
             method.invoke(this, req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }

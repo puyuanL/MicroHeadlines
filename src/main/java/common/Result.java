@@ -1,20 +1,22 @@
 package common;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * 全局统一返回结果类
- *
+ * return Result Class
  */
+@Setter
+@Getter
 public class Result<T> {
-    // 返回码
     private Integer code;
-    // 返回消息
     private String message;
-    // 返回数据
     private T data;
     public Result(){}
-    // 返回数据
+
+    // build data, return result
     protected static <T> Result<T> build(T data) {
-        Result<T> result = new Result<T>();
+        Result<T> result = new Result<>();
         if (data != null)
             result.setData(data);
         return result;
@@ -32,10 +34,10 @@ public class Result<T> {
         return result;
     }
     /**
-     * 操作成功
-     * @param data  baseCategory1List
-     * @param <T>
-     * @return
+     * operate success
+     * @param data baseCategory1List
+     * @param <T> all type data
+     * @return Result Object
      */
     public static<T> Result<T> ok(T data){
         Result<T> result = build(data);
@@ -49,22 +51,5 @@ public class Result<T> {
         this.setCode(code);
         return this;
     }
-    public Integer getCode() {
-        return code;
-    }
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-    public String getMessage() {
-        return message;
-    }
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    public T getData() {
-        return data;
-    }
-    public void setData(T data) {
-        this.data = data;
-    }
+
 }

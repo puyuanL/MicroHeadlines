@@ -1,7 +1,7 @@
 package controller;
 
 import common.Result;
-import pojo.NewsHeadline;
+
 import pojo.NewsType;
 import pojo.vo.HeadlineDetailVo;
 import pojo.vo.HeadlineQueryVo;
@@ -15,7 +15,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

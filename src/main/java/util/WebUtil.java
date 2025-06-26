@@ -11,20 +11,20 @@ import java.text.SimpleDateFormat;
 
 public class WebUtil {
     private static final ObjectMapper objectMapper;
-    // 初始化objectMapper
+    // Init ObjectMapper
     static{
         objectMapper=new ObjectMapper();
-        // 设置JSON和Object转换时的时间日期格式
+        // set time Convert Format of JSON and Object
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
     }
-    // 从请求中获取JSON串并转换为Object
+    // get JSON from request and convert to Object
     public static <T> T readJson(HttpServletRequest request,Class<T> clazz){
-        T t =null;
-        BufferedReader reader = null;
+        T t;
+        BufferedReader reader;
         try {
             reader = request.getReader();
             StringBuilder buffer =new StringBuilder();
-            String line =null;
+            String line;
             while((line = reader.readLine())!= null){
                 buffer.append(line);
             }
@@ -35,8 +35,8 @@ public class WebUtil {
         }
         return t;
     }
-    // 将Result对象转换成JSON串并放入响应对象
-    public static void writeJson(HttpServletResponse response, Result result){
+    // Convert Result to JSON, and put Result into response
+    public static void writeJson(HttpServletResponse response, Result<?> result){
         response.setContentType("application/json;charset=UTF-8");
         try {
             String json = objectMapper.writeValueAsString(result);

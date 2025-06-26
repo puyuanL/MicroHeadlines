@@ -12,8 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.naming.spi.ResolveResult;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

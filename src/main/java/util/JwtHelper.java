@@ -11,19 +11,20 @@ public class JwtHelper {
 
     // generate token string
     public static String createToken(Long userId) {
-        String token = Jwts.builder()
+        // return token
+        return Jwts.builder()
                 .setSubject("YYGH-USER")
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
                 .claim("userId", userId)
                 .signWith(SignatureAlgorithm.HS256, tokenSignKey)
                 .compressWith(CompressionCodecs.GZIP)
                 .compact();
-        return token;
     }
 
     // get userid through token
     public static Long getUserId(String token) {
-        if(StringUtils.isEmpty(token)) return null;
+        if(StringUtils.isEmpty(token))
+            return null;
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         Integer userId = (Integer)claims.get("userId");
@@ -33,13 +34,12 @@ public class JwtHelper {
     // judge if token is effective
     public static boolean isExpiration(String token){
         try {
-            boolean isExpire = Jwts.parser()
+            // return is Expiration or not
+            return Jwts.parser()
                     .setSigningKey(tokenSignKey)
                     .parseClaimsJws(token)
                     .getBody()
                     .getExpiration().before(new Date());
-            // not out of time ,return false
-            return isExpire;
         } catch(Exception e) {
             // out of time, return true
             return true;

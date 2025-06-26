@@ -6,7 +6,6 @@ import pojo.NewsHeadline;
 import pojo.vo.HeadlineDetailVo;
 import pojo.vo.HeadlinePageVo;
 import pojo.vo.HeadlineQueryVo;
-import util.WebUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface NewsTypeDao {
     /**
-     *
-     * @return
+     * find all type of news
+     * @return List of NewsType
      */
     List<NewsType> findAll();
 }

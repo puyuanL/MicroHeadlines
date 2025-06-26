@@ -3,7 +3,6 @@ package dao.impl;
 import dao.BaseDao;
 import dao.NewsUserDao;
 import pojo.NewsUser;
-import util.JDBCUtil;
 
 import java.util.List;
 

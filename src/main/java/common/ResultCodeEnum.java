@@ -3,7 +3,7 @@ package common;
 import lombok.Getter;
 
 /**
- * 统一返回结果状态信息类
+ * return Result Information Class
  */
 @Getter
 public enum ResultCodeEnum {

@@ -14,9 +14,9 @@ public class JDBCUtil {
     private static final ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
     private static final DataSource dataSource;
 
-    // 初始化连接池
+    // init connection pool
     static{
-        // 可以帮助我们读取.properties配置文件
+        // read .properties files
         Properties properties = new Properties();
         InputStream resourceAsStream = JDBCUtil.class.getClassLoader().getResourceAsStream("jdbc.properties");
         try {
@@ -32,7 +32,7 @@ public class JDBCUtil {
         }
     }
 
-//    /*1 向外提供连接池的方法*/
+//    // return connection pool
 //    public static DataSource getDataSource(){
 //        return dataSource;
 //    }

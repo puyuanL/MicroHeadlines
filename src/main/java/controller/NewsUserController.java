@@ -33,7 +33,7 @@ public class NewsUserController extends BaseController{
 
         // call service layer
         NewsUser loginUser = userService.findByUsername(paramUser.getUsername());
-        Result<Map<?, ?>> result = null;
+        Result<Map<?, ?>> result;
 
         if(null != loginUser){
             if (MD5Util.encrypt(paramUser.getUserPwd()).equalsIgnoreCase(loginUser.getUserPwd())) {
@@ -106,7 +106,7 @@ public class NewsUserController extends BaseController{
             result = Result.build(null, ResultCodeEnum.USERNAME_USED);
         }
         else {
-            Integer registCode = userService.registUser(newsUser);
+            userService.registUser(newsUser);
             result = Result.build(null, ResultCodeEnum.SUCCESS);
         }
         WebUtil.writeJson(resp, result);
