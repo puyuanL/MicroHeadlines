@@ -38,4 +38,14 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
         newsHeadlineMap.put("totalSize", totalSize);
         return newsHeadlineMap;
     }
+
+    /**
+     * find news detail, base on hid
+     * @param hid id of news
+     * @return all data of news
+     */
+    public HeadlineDetailVo findHeadlineDetail(int hid) {
+        newsHeadlineDao.increasePageViews(hid);
+        return newsHeadlineDao.findHeadlineDetail(hid);
+    }
 }

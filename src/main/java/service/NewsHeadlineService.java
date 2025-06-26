@@ -8,22 +8,23 @@ import java.util.Map;
 
 public interface NewsHeadlineService {
     /**
-     *
-     * @param headlineQueryVo
-     * @return
+     * find all news data, base on headlineQuery's keywords
+     * @param headlineQueryVo HeadlineQueryVo
+     * @return map of all news data
      */
      Map<String, Object> findPage(HeadlineQueryVo headlineQueryVo);
 
     /**
-     *
-     * @param hid
-     * @return
+     * find news detail, base on hid
+     * @param hid id of news
+     * @return all data of news
      */
-//    HeadlineDetailVo findHeadlineDetail(int hid);
+    HeadlineDetailVo findHeadlineDetail(int hid);
 
     /**
-     *
+     * add one piece of news to database
      * @param newsHeadline
+     * @return int
      */
 //    int addNewsHeadline(NewsHeadline newsHeadline);
 

@@ -27,14 +27,14 @@ public interface NewsHeadlineDao {
      * @param hid
      * @return
      */
-//    int incrPageViews(int hid);
+     int increasePageViews(int hid);
 
-     /**
-     *
-     * @param hid
-     * @return
+    /**
+     * find news detail, base on hid
+     * @param hid id of news
+     * @return all data of news
      */
-//    HeadlineDetailVo findHealineDetail(int hid);
+     HeadlineDetailVo findHeadlineDetail(int hid);
 
 //    int addNewsHeadline(NewsHeadline newsHeadline);
 

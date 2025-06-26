@@ -29,7 +29,6 @@ public class PortalController extends BaseController{
     private final NewsTypeService typeService = new NewsTypeServiceImpl();
     private final NewsHeadlineService headlineService = new NewsHeadlineServiceImpl();
 
-
     /**
      * The interface implementation for querying the details of Headlines
      * @param req HttpServletRequest
@@ -37,7 +36,11 @@ public class PortalController extends BaseController{
      * @throws ServletException ServletException
      */
     protected void showHeadlineDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
-
+        int hid = Integer.parseInt(req.getParameter("hid"));
+        HeadlineDetailVo headlineDetailVo = headlineService.findHeadlineDetail(hid);
+        Map<String, Object> data = new HashMap<>();
+        data.put("headline", headlineDetailVo);
+        WebUtil.writeJson(resp, Result.ok(data));
     }
 
     /**
@@ -64,4 +67,5 @@ public class PortalController extends BaseController{
         List<NewsType> newsTypeList = typeService.findAll();
         WebUtil.writeJson(resp, Result.ok(newsTypeList));
     }
+
 }
