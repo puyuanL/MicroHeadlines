@@ -48,4 +48,13 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
         newsHeadlineDao.increasePageViews(hid);
         return newsHeadlineDao.findHeadlineDetail(hid);
     }
+
+    /**
+     * add one piece of news to database
+     * @param newsHeadline NewsHeadline
+     * @return SQL Insert State Code
+     */
+    public int addNewsHeadline(NewsHeadline newsHeadline) {
+        return newsHeadlineDao.addNewsHeadline(newsHeadline);
+    }
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import common.Result;
+import common.ResultCodeEnum;
 import pojo.NewsHeadline;
 import service.NewsHeadlineService;
 import service.impl.NewsHeadlineServiceImpl;
@@ -17,51 +18,59 @@ import java.util.Map;
 
 @WebServlet("/headline/*")
 public class NewsHeadlineController extends BaseController{
-    private NewsHeadlineService headlineService = new NewsHeadlineServiceImpl();
-
+    private final NewsHeadlineService headlineService = new NewsHeadlineServiceImpl();
 
     /**
-     * 删除头条业务接口 实现
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * delete headline news
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
     protected void removeByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 
     /**
-     * 更新头条的业务接口实现
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * update headline news
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
 
-    protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
     }
 
     /**
-     * 修改头条回显业务接口
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * find headline news by hid
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
-    protected void findHeadlineByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void findHeadlineByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
     }
 
     /**
-     * 发布头条的接口实现
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
+     * publish headline news
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
      */
-    protected void publish(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void publish(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        String token = req.getHeader("token");
 
+        Result<Object> result = Result.build(null, ResultCodeEnum.NOTLOGIN);
+        if(token != null && !JwtHelper.isExpiration(token)) {
+            NewsHeadline newsHeadline = WebUtil.readJson(req, NewsHeadline.class);
+            Long userId = JwtHelper.getUserId(token);
+            assert userId != null;
+            newsHeadline.setPublisher(userId.intValue());
+            if(headlineService.addNewsHeadline(newsHeadline) > 0)
+                result = Result.ok(null);
+            else
+                result = Result.build(null, ResultCodeEnum.PUBLISH_ERROR);
+        }
+        WebUtil.writeJson(resp, result);
     }
 }

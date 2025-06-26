@@ -12,7 +12,6 @@ import java.util.List;
 
 public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
 
-
     @Override
     public List<HeadlinePageVo> findPageList(HeadlineQueryVo headlineQueryVo) {
         String keyWords = headlineQueryVo.getKeyWords();
@@ -69,14 +68,12 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
     }
 
     @Override
-    public int increasePageViews(int hid) {
+    public void increasePageViews(int hid) {
         String sql = """
                 UPDATE news_headline SET page_views = page_views + 1
                 WHERE hid = ?""";
-        return baseUpdate(sql, hid);
+        baseUpdate(sql, hid);
     }
-
-
 
     @Override
     public HeadlineDetailVo findHeadlineDetail(int hid) {
@@ -102,11 +99,19 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
         }
         return null;
     }
-//
-//    @Override
-//    public int addNewsHeadline(NewsHeadline newsHeadline) {
-//
-//    }
+
+    @Override
+    public int addNewsHeadline(NewsHeadline newsHeadline) {
+        String sql = """
+                INSERT news_headline(title,article,type,publisher,page_views,create_time,update_time,is_deleted)
+                VALUES(?,?,?,?,0,NOW(),NOW(),0)""";
+        List<Object> params = new ArrayList<>();
+        params.add(newsHeadline.getTitle());
+        params.add(newsHeadline.getArticle());
+        params.add(newsHeadline.getType());
+        params.add(newsHeadline.getPublisher());
+        return baseUpdate(sql, params.toArray());
+    }
 //
 //    @Override
 //    public NewsHeadline findByHid(Integer hid) {

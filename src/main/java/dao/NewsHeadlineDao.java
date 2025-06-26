@@ -23,11 +23,10 @@ public interface NewsHeadlineDao {
      int findPageCount(HeadlineQueryVo headlineQueryVo);
 
     /**
-     *
-     * @param hid
-     * @return
+     * increase news view number, after page visualize
+     * @param hid headline news id
      */
-     int increasePageViews(int hid);
+     void increasePageViews(int hid);
 
     /**
      * find news detail, base on hid
@@ -36,7 +35,12 @@ public interface NewsHeadlineDao {
      */
      HeadlineDetailVo findHeadlineDetail(int hid);
 
-//    int addNewsHeadline(NewsHeadline newsHeadline);
+    /**
+     * find news detail, base on hid
+     * @param newsHeadline NewsHeadline
+     * @return SQL Insert State Code
+     */
+     int addNewsHeadline(NewsHeadline newsHeadline);
 
     /**
      *

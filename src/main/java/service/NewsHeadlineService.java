@@ -23,10 +23,9 @@ public interface NewsHeadlineService {
 
     /**
      * add one piece of news to database
-     * @param newsHeadline
-     * @return int
+     * @param newsHeadline NewsHeadline
      */
-//    int addNewsHeadline(NewsHeadline newsHeadline);
+    int addNewsHeadline(NewsHeadline newsHeadline);
 
     /**
      *
