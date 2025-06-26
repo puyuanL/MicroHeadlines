@@ -29,14 +29,9 @@ public class NewsUserController extends BaseController{
      * @throws ServletException ServletException
      */
     protected void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
-        /*  {
-                "username":"zhangsan", //用户名
-                "userPwd":"123456"     //明文密码
-            }
-        */
         NewsUser paramUser = WebUtil.readJson(req, NewsUser.class);
 
-        // 调用服务层方法 实现登录
+        // call service layer
         NewsUser loginUser = userService.findByUsername(paramUser.getUsername());
         Result<Map<?, ?>> result = null;
 
@@ -52,7 +47,7 @@ public class NewsUserController extends BaseController{
             result = Result.build(null, ResultCodeEnum.USERNAME_ERROR);
 
         }
-        // 向客户端响应登录验证信息
+        // Respond to the login verification information to the client
         WebUtil.writeJson(resp, result);
     }
 
@@ -99,7 +94,6 @@ public class NewsUserController extends BaseController{
     /**
      * Send username to server, check if username is occupied.
      * If not do register movement
-     *
      * @param req HttpServletRequest
      * @param resp HttpServletResponse
      * @throws ServletException ServletException
@@ -114,6 +108,23 @@ public class NewsUserController extends BaseController{
         else {
             Integer registCode = userService.registUser(newsUser);
             result = Result.build(null, ResultCodeEnum.SUCCESS);
+        }
+        WebUtil.writeJson(resp, result);
+    }
+
+    /**
+     * Verify whether the user login has expired and respond, before update, delete news
+     * @param req HttpServletRequest
+     * @param resp HttpServletResponse
+     * @throws ServletException ServletException
+     * */
+    protected void checkLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        String token = req.getHeader("token");
+        Result<Map<String, NewsUser>> result = Result.build(null, ResultCodeEnum.NOTLOGIN);
+        if(null != token) {
+            if(!JwtHelper.isExpiration(token)){
+                result = Result.ok(null);
+            }
         }
         WebUtil.writeJson(resp, result);
     }

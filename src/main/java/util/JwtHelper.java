@@ -9,7 +9,7 @@ public class JwtHelper {
     private static final long tokenExpiration = 1000 * 60 * 60;
     private static final String tokenSignKey = "uhJP1vdK3OG+sd9tVTqkijhtMvAAMwcQogfyJo13wJs=";
 
-    // 生成token字符串
+    // generate token string
     public static String createToken(Long userId) {
         String token = Jwts.builder()
                 .setSubject("YYGH-USER")
@@ -21,7 +21,7 @@ public class JwtHelper {
         return token;
     }
 
-    // 从token字符串获取userid
+    // get userid through token
     public static Long getUserId(String token) {
         if(StringUtils.isEmpty(token)) return null;
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token);
@@ -30,9 +30,7 @@ public class JwtHelper {
         return userId.longValue();
     }
 
-
-
-    //判断token是否有效
+    // judge if token is effective
     public static boolean isExpiration(String token){
         try {
             boolean isExpire = Jwts.parser()
@@ -40,10 +38,10 @@ public class JwtHelper {
                     .parseClaimsJws(token)
                     .getBody()
                     .getExpiration().before(new Date());
-            //没有过期，有效，返回false
+            // not out of time ,return false
             return isExpire;
         } catch(Exception e) {
-            //过期出现异常，返回true
+            // out of time, return true
             return true;
         }
     }

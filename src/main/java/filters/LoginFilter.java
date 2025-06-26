@@ -7,7 +7,6 @@ import util.JwtHelper;
 import util.WebUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -15,7 +14,7 @@ import java.io.IOException;
 
 @WebFilter("/headline/*")
 public class LoginFilter  implements Filter {
-
+    // Prevent the illegal submission of added, deleted or modified information due to login expiration
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
@@ -23,7 +22,7 @@ public class LoginFilter  implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String token = request.getHeader("token");
 
-        boolean flag = null != token && (!JwtHelper.isExpiration(token));
+        boolean flag = (null != token) && (!JwtHelper.isExpiration(token));
 
         if(flag) {
             filterChain.doFilter(servletRequest,servletResponse);
