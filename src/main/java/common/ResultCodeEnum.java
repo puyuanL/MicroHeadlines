@@ -14,6 +14,8 @@ public enum ResultCodeEnum {
     NOTLOGIN(504,"notLogin"),
     USERNAME_USED(505,"userNameUsed"),
     PUBLISH_ERROR(506,"publishError"),
+    FIND_HID_ERROR(507,"findHidError"),
+    UPDATE_ERROR(508,"updateError"),
     ;
 
     private final Integer code;

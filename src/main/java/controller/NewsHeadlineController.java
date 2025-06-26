@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.naming.spi.ResolveResult;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,9 +37,16 @@ public class NewsHeadlineController extends BaseController{
      * @param resp HttpServletResponse
      * @throws ServletException ServletException
      */
-
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
-
+        NewsHeadline newsHeadline = WebUtil.readJson(req, NewsHeadline.class);
+        Result<?> result = Result.build(null, ResultCodeEnum.NOTLOGIN);
+        if(newsHeadline != null) {
+            if(headlineService.update(newsHeadline) > 0)
+                result = Result.ok(null);
+            else
+                result = Result.build(null, ResultCodeEnum.UPDATE_ERROR);
+        }
+        WebUtil.writeJson(resp, result);
     }
 
     /**
@@ -48,7 +56,15 @@ public class NewsHeadlineController extends BaseController{
      * @throws ServletException ServletException
      */
     protected void findHeadlineByHid(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
-
+        Integer hid = Integer.parseInt(req.getParameter("hid"));
+        NewsHeadline newsHeadline = headlineService.findByHid(hid);
+        Result<Map<String, Object>> result = Result.build(null, ResultCodeEnum.FIND_HID_ERROR);
+        if(newsHeadline != null) {
+            Map<String, Object> headline = new HashMap<>();
+            headline.put("headline", newsHeadline);
+            result = Result.ok(headline);
+        }
+        WebUtil.writeJson(resp, result);
     }
 
     /**

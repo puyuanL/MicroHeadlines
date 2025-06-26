@@ -57,4 +57,21 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
     public int addNewsHeadline(NewsHeadline newsHeadline) {
         return newsHeadlineDao.addNewsHeadline(newsHeadline);
     }
+
+    /**
+     * find news data by hid
+     * @param hid news id
+     * @return NewsHeadline
+     */
+    public NewsHeadline findByHid(Integer hid) {
+        return newsHeadlineDao.findByHid(hid);
+    }
+
+    /**
+     * update news data
+     * @param newsHeadline NewsHeadline
+     */
+    public int update(NewsHeadline newsHeadline) {
+        return newsHeadlineDao.update(newsHeadline);
+    }
 }

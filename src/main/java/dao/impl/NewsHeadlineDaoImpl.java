@@ -6,6 +6,7 @@ import pojo.NewsHeadline;
 import pojo.vo.HeadlineDetailVo;
 import pojo.vo.HeadlinePageVo;
 import pojo.vo.HeadlineQueryVo;
+import util.WebUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,17 +113,36 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
         params.add(newsHeadline.getPublisher());
         return baseUpdate(sql, params.toArray());
     }
-//
-//    @Override
-//    public NewsHeadline findByHid(Integer hid) {
-//
-//    }
+
+    @Override
+    public NewsHeadline findByHid(Integer hid) {
+        String sql = """
+                SELECT hid,title,article,type
+                FROM news_headline WHERE hid=?""";
+        List<NewsHeadline> headlineList = baseQuery(NewsHeadline.class, sql, hid);
+        if(headlineList != null && !headlineList.isEmpty()) {
+            return headlineList.get(0);
+        }
+        return null;
+    }
 
 
-//    @Override
-//    public int update(NewsHeadline newsHeadline) {
-//
-//    }
+    @Override
+    public int update(NewsHeadline newsHeadline) {
+        String sql = """
+                UPDATE news_headline SET
+                    title = ?,
+                    article = ?,
+                    type = ?
+                WHERE hid = ?
+                """;
+        List<Object> params = new ArrayList<>();
+        params.add(newsHeadline.getTitle());
+        params.add(newsHeadline.getArticle());
+        params.add(newsHeadline.getType());
+        params.add(newsHeadline.getHid());
+        return baseUpdate(sql, params.toArray());
+    }
 
 
 //    @Override

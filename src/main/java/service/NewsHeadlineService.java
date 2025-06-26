@@ -28,13 +28,17 @@ public interface NewsHeadlineService {
     int addNewsHeadline(NewsHeadline newsHeadline);
 
     /**
-     *
-     * @param hid
-     * @return
+     * find news data by hid
+     * @param hid news id
+     * @return NewsHeadline
      */
-//    NewsHeadline findByHid(Integer hid);
+    NewsHeadline findByHid(Integer hid);
 
-//    int update(NewsHeadline newsHeadline);
+    /**
+     * update news data
+     * @param newsHeadline NewsHeadline
+     */
+    int update(NewsHeadline newsHeadline);
 
 
     /**

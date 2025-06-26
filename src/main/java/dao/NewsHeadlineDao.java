@@ -43,13 +43,13 @@ public interface NewsHeadlineDao {
      int addNewsHeadline(NewsHeadline newsHeadline);
 
     /**
-     *
-     * @param hid
-     * @return
+     * find news by hid
+     * @param hid news id
+     * @return NewsHeadline all information
      */
-//    NewsHeadline findByHid(Integer hid);
+    NewsHeadline findByHid(Integer hid);
 
-//    int update(NewsHeadline newsHeadline);
+    int update(NewsHeadline newsHeadline);
 
 //    int removeByHid(int hid);
 }
